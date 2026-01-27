@@ -13,7 +13,7 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         model: "zai-glm-4.7",
         messages: [
-          { role: "system", content: "Eres un asistente útil que responde solo en JSON." },
+          { role: "system", content: "Eres un asistente de creación de rutas turísticas útil que responde solo en JSON." },
           { role: "user", content: body.prompt }
         ],
         temperature: 0.2,

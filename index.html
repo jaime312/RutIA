@@ -309,7 +309,7 @@
     <div class="footer">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <span>Powered by: <span class="footer-brand">Hermanos Vidal</span></span>
-        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v3.5</span>
+        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.0</span>
     </div>
 
     <script type="module">
@@ -379,23 +379,42 @@
             userOrigin = exactLocation ? exactLocation : location;
 
             // Construcción del Prompt
-            const prompt = `Eres un guía experto. Crea un itinerario de ${daysCount} día(s) en ${location}.
-            Intereses: "${interest}".
-            Duración por día: ${duration} minutos.
-            Inicio obligatorio cada día: "${userOrigin}".
-            Tipo de ruta: ${isCircular ? "CIRCULAR (acaba donde empieza)" : "LINEAL (ve de punto A a punto B)"}.
+            let exampleParadas;
+            if (isCircular) {
+                exampleParadas = `["${userOrigin}", "Lugar 1", "Lugar 2", "Lugar 3", "Lugar 4", "Lugar 5", "Lugar 6", "Lugar 7", "Lugar 8", "Lugar 9", "${userOrigin}"]`;
+            } else {
+                exampleParadas = `["${userOrigin}", "Lugar 1", "Lugar 2", "Lugar 3", "Lugar 4", "Lugar 5", "Lugar 6", "Lugar 7", "Lugar 8", "Lugar 9", "Fin"]`;
+            }
+
+            const prompt = `
+            ACTÚA COMO: Un guía local experto, historiador de ciudades y paisajes y planificador logístico de élite.
             
-            IMPORTANTE: Devuelve SOLO un JSON válido con esta estructura:
+            OBJETIVO: Crear la ruta turística PERFECTA de ${daysCount} día(s) en ${location}.
+            
+            DATOS DEL VIAJERO:
+            - Intereses Principales: "${interest}" (Prioridad ABSOLUTA. Si le gusta la comida, añade mercados/cafés famosos. Si le gusta la historia, detalla curiosidades).
+            - Duración Caminando Máxima por día: ${duration} minutos. (Calcula la distancia realista).
+            - Punto de Inicio Obligatorio: "${userOrigin}".
+            - Tipo de Ruta: ${isCircular ? "CIRCULAR (Debe terminar exactamente donde empezó)" : "LINEAL (Optimiza para no volver atrás)"}.
+            
+            REGLAS DE ORO DE LA RUTA:
+            1. LÓGICA GEOGRÁFICA: Las paradas deben seguir un orden caminable REAL. No saltar de una punta de la ciudad a otra.
+            2. VALOR AÑADIDO: Cada parada debe tener un porqué. No rellenes con sitios genéricos.
+            3. COMPLETITUD: Usa el tiempo disponible al máximo. Si son 180 min, no pongas solo 2 sitios.
+            4. HISTORIA EMOCIONANTE: En la descripción ("historia"), cuenta un dato curioso, oscuro o fascinante. Usa emojis para dar vida.
+            
+            ESTRUCTURA DE RESPUESTA REQUERIDA (JSON PURO):
             {
                 "dias": [
                     {
                         "dia": 1,
-                        "titulo": "Nombre de la zona",
-                        "historia": "Breve descripción con emojis",
-                        "paradas": ["${userOrigin}", "Lugar 1", "Fin"]
+                        "titulo": "Título Creativo del Día (Ej: 'Secretos del Barrio Gótico')",
+                        "historia": "Párrafo inmersivo explicando el recorrido y por qué es genial para este usuario.",
+                        "paradas": ${exampleParadas}
                     }
                 ]
-            }`;
+            }
+            IMPORTANTE: Devuelve SOLO el JSON sin markdown, sin "json", sin nada más.`;
 
             try {
                 // LLAMADA AL WORKER LOCAL (_worker.js)
