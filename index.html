@@ -309,7 +309,7 @@
     <div class="footer">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <span>Powered by: <span class="footer-brand">Hermanos Vidal</span></span>
-        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.0</span>
+        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.1</span>
     </div>
 
     <script type="module">
@@ -393,15 +393,15 @@
             
             DATOS DEL VIAJERO:
             - Intereses Principales: "${interest}" (Prioridad ABSOLUTA. Si le gusta la comida, añade mercados/cafés famosos. Si le gusta la historia, detalla curiosidades).
-            - Duración Caminando Máxima por día: ${duration} minutos. (Calcula la distancia realista).
+            - Duración Caminando Aproximadamente de la ruta: ${duration} minutos. (Calcula la distancia realista).
             - Punto de Inicio Obligatorio: "${userOrigin}".
             - Tipo de Ruta: ${isCircular ? "CIRCULAR (Debe terminar exactamente donde empezó)" : "LINEAL (Optimiza para no volver atrás)"}.
             
             REGLAS DE ORO DE LA RUTA:
-            1. LÓGICA GEOGRÁFICA: Las paradas deben seguir un orden caminable REAL. No saltar de una punta de la ciudad a otra.
-            2. VALOR AÑADIDO: Cada parada debe tener un porqué. No rellenes con sitios genéricos.
-            3. COMPLETITUD: Usa el tiempo disponible al máximo. Si son 180 min, no pongas solo 2 sitios.
-            4. HISTORIA EMOCIONANTE: En la descripción ("historia"), cuenta un dato curioso, oscuro o fascinante. Usa emojis para dar vida.
+            1. LÓGICA GEOGRÁFICA: Las paradas deben seguir un orden caminable REAL. No saltar de una punta de la ciudad a otra, ir consecutivamente de punto a punto por cercanía.
+            2. VALOR AÑADIDO: Cada parada debe tener un porqué, ser un lugar importante en la historia, cultura o gastronomía de la ciudad. No rellenes con sitios genéricos.
+            3. COMPLETITUD: Usa el tiempo disponible para cubrir todos los puntos de interés. Debes ajustar siempre el numero de sitios a la duración aproximada de la ruta, mejor pasarse poniendo muchos sitios.
+            4. HISTORIA EMOCIONANTE: En la descripción ("historia"), cuenta datos curiosos, oscuros o fascinantes. Usa emojis para dar vida.
             
             ESTRUCTURA DE RESPUESTA REQUERIDA (JSON PURO):
             {
@@ -443,7 +443,15 @@
                 // Renderizar Resultados
                 let htmlContent = "";
                 routeData.forEach((day, index) => {
-                    const paradasStr = day.paradas ? day.paradas.join(" ➝ ") : "Ruta sugerida";
+                    let displayParadas = [...(day.paradas || [])];
+                    if (displayParadas.length > 0 && userOrigin) {
+                        const firstStop = displayParadas[0].toLowerCase().trim();
+                        const originClean = userOrigin.toLowerCase().trim();
+                        if (firstStop === originClean || firstStop.includes(originClean) || originClean.includes(firstStop)) {
+                            displayParadas.shift();
+                        }
+                    }
+                    const paradasStr = displayParadas.length > 0 ? displayParadas.join(" ➝ ") : "Ruta sugerida";
 
                     htmlContent += `
                         <div style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;">
@@ -477,6 +485,15 @@
 
             let paradas = [...dayRoute.paradas];
             const isCircular = document.getElementById('routeTypeToggle').checked;
+
+            // FIX: Remove start point if duplicated in waypoints
+            if (paradas.length > 0 && userOrigin) {
+                const firstStop = paradas[0].toLowerCase().trim();
+                const originClean = userOrigin.toLowerCase().trim();
+                if (firstStop === originClean || firstStop.includes(originClean) || originClean.includes(firstStop)) {
+                    paradas.shift();
+                }
+            }
 
             const originEncoded = encodeURIComponent(userOrigin);
             let destinationEncoded = "";
