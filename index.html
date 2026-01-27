@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agente de Viajes IA - LOCAL</title>
+    <title>AutoViaje - Agente de Viajes IA</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -247,7 +247,13 @@
 <body>
 
     <div class="card">
-        <h1>✈️ Guía IA</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1 style="margin: 0;">✈️ Guía IA</h1>
+            <button type="button" id="clearBtn" title="Nueva Búsqueda"
+                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+        </div>
         <p style="opacity: 0.8; margin-bottom: 20px;">Describe tu viaje y obtén la ruta perfecta.</p>
 
         <form id="travelForm">
@@ -309,7 +315,7 @@
     <div class="footer">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <span>Powered by: <span class="footer-brand">Hermanos Vidal</span></span>
-        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.1</span>
+        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.2</span>
     </div>
 
     <script type="module">
@@ -327,6 +333,39 @@
         const dayCountContainer = document.getElementById('dayCountContainer');
         const daysCountInput = document.getElementById('daysCount');
         const dayBtns = document.querySelectorAll('.day-btn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // --- CLEAR FORM LOGIC ---
+        clearBtn.addEventListener('click', () => {
+            // Reset UI Inputs
+            form.reset();
+            document.getElementById('duration').value = "90";
+            document.getElementById('daysCount').value = "1";
+
+            // Reset Active Buttons
+            durationBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('.duration-btn[data-time="90"]').classList.add('active');
+
+            dayBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('.day-btn[data-days="2"]').classList.remove('active'); // Reset days
+
+            // Reset Toggles
+            if (dayToggle.checked) {
+                dayToggle.click(); // Trigger change event to hide container
+            }
+            dayCountContainer.style.display = 'none';
+
+            // Clear Results
+            resultBox.style.display = 'none';
+            resultBox.innerHTML = '';
+            errorBox.style.display = 'none';
+            submitBtn.style.display = 'block';
+
+            // Clear internal variables
+            routeData = [];
+            userOrigin = "";
+            console.log("Contexto limpiado.");
+        });
 
         // --- UI LOGIC ---
         dayToggle.addEventListener('change', () => {
@@ -363,11 +402,14 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Clear previous data explicitly
+            routeData = [];
+            resultBox.innerHTML = '';
+
             submitBtn.style.display = 'none';
             spinner.style.display = 'block';
             resultBox.style.display = 'none';
             errorBox.style.display = 'none';
-            resultBox.innerHTML = '';
 
             const location = document.getElementById('location').value;
             const interest = document.getElementById('interest').value;
@@ -418,10 +460,12 @@
 
             try {
                 // LLAMADA AL WORKER LOCAL (_worker.js)
+                // Usamos cache: 'no-store' para evitar que el navegador guarde la respuesta anterior
                 const response = await fetch("/api/route", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ prompt: prompt })
+                    body: JSON.stringify({ prompt: prompt }),
+                    cache: "no-store"
                 });
 
                 if (!response.ok) {

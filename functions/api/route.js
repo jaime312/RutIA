@@ -24,7 +24,12 @@ export async function onRequestPost(context) {
     const data = await response.text();
 
     return new Response(data, {
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+      }
     });
 
   } catch (e) {
