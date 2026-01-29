@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compañía - AutoViaje</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --accent-gradient: linear-gradient(45deg, #FF512F, #DD2476);
+            --bg-dark: #141E30;
+            --bg-darker: #0f1724;
+            --text-main: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .navbar {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-company {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .text-block h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .text-block p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .image-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        /* --- BLOG GRID --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-img {
+            height: 150px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 2rem;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-tag {
+            font-size: 0.8rem;
+            color: #FF512F;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .blog-title {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        /* --- CONTACT FORM --- */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+        }
+
+        .btn {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="../index.html" class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AutoViaje
+            </a>
+        </nav>
+
+        <section id="about" class="hero-company">
+            <h1>Hermanos Vidal</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: var(--text-secondary);">
+                Innovando en tecnología y turismo desde Madrid para el mundo.
+            </p>
+        </section>
+
+        <section class="content-grid">
+            <div class="text-block">
+                <h2>Nuestra Misión</h2>
+                <p>Nacimos con una idea simple: viajar debería ser sobre disfrutar, no sobre estresarse planificando.
+                    Somos un equipo apasionado por la inteligencia artificial y la cultura local.</p>
+                <p>Creemos en un futuro donde la tecnología nos hace más humanos, permitiéndonos conectar con los
+                    lugares que visitamos de una forma auténtica y profunda.</p>
+            </div>
+            <div class="image-block">
+                <i class="fa-solid fa-users-viewfinder" style="font-size: 4rem; opacity: 0.5;"></i>
+            </div>
+        </section>
+
+        <section id="blog" style="margin-bottom: 100px;">
+            <h2 style="text-align: center; margin-bottom: 40px;">Últimas Novedades</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fa-solid fa-rocket"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Producto</div>
+                        <h4 class="blog-title">Lanzamiento de AutoViaje v4.5</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Mejoras en la lógica de rutas circulares y nuevos
+                            mapas interactivos.</p>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fa-solid fa-earth-europe"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Destinos</div>
+                        <h4 class="blog-title">Top 10 Rutas por Madrid</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Descubre los rincones secretos que nuestra IA
+                            recomienda más a menudo.</p>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fa-solid fa-code"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Tech</div>
+                        <h4 class="blog-title">Cómo funciona nuestra IA</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Una mirada técnica al algoritmo detrás de la magia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 style="text-align: center; margin-bottom: 40px;">Contáctanos</h2>
+            <div class="contact-form">
+                <p style="margin-bottom: 20px;">¿Tienes dudas o propuestas? Escríbenos.</p>
+                <form>
+                    <input type="text" placeholder="Tu Nombre">
+                    <input type="email" placeholder="Tu Email">
+                    <textarea rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+                <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.6;">O escríbenos directamente a:
+                    info@hermanosvidal.com</p>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>

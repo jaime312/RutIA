@@ -4,66 +4,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoViaje - Agente de Viajes IA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>AutoViaje - Tu Agente de Viajes IA Personal</title>
+    <meta name="description"
+        content="Planifica tu viaje perfecto en segundos con AutoViaje. Rutas personalizadas, tesoros ocultos y optimización de tiempo con Inteligencia Artificial.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ESTILOS ORIGINALES MANTENIDOS */
         :root {
             --primary: #6C63FF;
-            --glass: rgba(255, 255, 255, 0.1);
-            --border: rgba(255, 255, 255, 0.2);
+            --accent-gradient: linear-gradient(45deg, #FF512F, #DD2476);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-hover: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #141E30;
+            --bg-darker: #0f1724;
+            --text-main: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
         }
 
         body {
             margin: 0;
-            padding: 20px;
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #141E30, #243B55);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            flex-direction: column;
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .footer {
-            margin-top: 30px;
-            padding: 10px 20px;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            font-size: 0.85rem;
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- HEADER / NAVBAR --- */
+        .navbar {
+            padding: 20px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-brand {
-            font-weight: 600;
-            background: linear-gradient(45deg, #FF512F, #DD2476);
+        .logo i {
+            background: var(--accent-gradient);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
+        .nav-links {
+            display: flex;
+            gap: 30px;
         }
 
-        h1 {
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FF512F;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 81, 47, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(221, 36, 118, 0.1) 0%, transparent 20%);
+            padding-top: 80px;
+        }
+
+        .hero-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text span {
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- TRAVEL APP CARD (EMBEDDED) --- */
+        .app-card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .card {
+            background: rgba(20, 30, 48, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- FORM ELEMENTS (Existing styles adapted) --- */
+        h1.form-title {
             margin-top: 0;
             font-weight: 600;
+            font-size: 1.5rem;
         }
 
         input,
@@ -73,67 +203,43 @@
             margin-bottom: 15px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
             font-family: inherit;
             box-sizing: border-box;
+            transition: all 0.3s;
         }
 
         input:focus,
         textarea:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 10px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .btn-search {
-            background: linear-gradient(45deg, #FF512F, #DD2476);
+            background: var(--accent-gradient);
             color: white;
+            box-shadow: 0 4px 15px rgba(221, 36, 118, 0.4);
         }
 
         .btn-search:hover {
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(221, 36, 118, 0.5);
         }
 
-        .result-box {
-            display: none;
-            margin-top: 25px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: left;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            border-left: 4px solid #FF512F;
-        }
-
-        .spinner {
-            display: none;
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s infinite linear;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
+        /* --- TOGGLES & BUTTONS WITHIN FORM --- */
         .route-toggle-container {
             display: flex;
             align-items: center;
@@ -150,7 +256,7 @@
             position: relative;
             width: 100%;
             height: 50px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
             border-radius: 25px;
             cursor: pointer;
@@ -164,9 +270,9 @@
             position: absolute;
             width: 50%;
             height: 42px;
-            background: linear-gradient(45deg, #FF512F, #DD2476);
+            background: var(--accent-gradient);
             border-radius: 22px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             left: 4px;
             z-index: 1;
@@ -180,16 +286,14 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s;
         }
 
         .toggle-checkbox:checked+.toggle-label .toggle-btn {
             left: calc(50% - 4px);
         }
 
-        .toggle-checkbox:not(:checked)+.toggle-label .toggle-text-left {
-            color: white;
-        }
-
+        .toggle-checkbox:not(:checked)+.toggle-label .toggle-text-left,
         .toggle-checkbox:checked+.toggle-label .toggle-text-right {
             color: white;
         }
@@ -202,7 +306,6 @@
             font-size: 0.9rem;
             margin-bottom: 10px;
             color: rgba(255, 255, 255, 0.8);
-            text-align: left;
             display: block;
         }
 
@@ -214,9 +317,9 @@
 
         .duration-btn,
         .day-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 10px 5px;
             color: white;
             cursor: pointer;
@@ -226,98 +329,558 @@
 
         .duration-btn:hover,
         .day-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .duration-btn.active {
-            background: linear-gradient(45deg, #FF512F, #DD2476);
+            background: var(--accent-gradient);
             font-weight: bold;
-            transform: scale(1.05);
+            border-color: transparent;
         }
 
         .day-btn.active {
             background: linear-gradient(45deg, #11998e, #38ef7d);
             font-weight: bold;
-            transform: scale(1.05);
+            border-color: transparent;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: var(--glass-hover);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-darker);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            margin-top: 15px;
+        }
+
+        .faq-item.active i {
+            transform: rotate(180deg);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--bg-darker);
+            padding: 60px 0 20px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand h4 {
+            font-size: 1.5rem;
+            margin: 0 0 20px 0;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-col h5 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #FF512F;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- SPINNER & RESULTS & ERROR --- */
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            border-left: 4px solid #FF512F;
+        }
+
+        .spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #FF512F;
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px auto;
+            }
+
+            .features-grid,
+            .stats-grid,
+            .testimonial-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h1 style="margin: 0;">✈️ Guía IA</h1>
-            <button type="button" id="clearBtn" title="Nueva Búsqueda"
-                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
-                <i class="fa-solid fa-rotate-right"></i>
-            </button>
-        </div>
-        <p style="opacity: 0.8; margin-bottom: 20px;">Describe tu viaje y obtén la ruta perfecta.</p>
-
-        <form id="travelForm">
-            <input type="text" id="location" placeholder="¿Dónde estás? (Ej: Madrid, España...)" required>
-            <input type="text" id="exactLocation" placeholder="Punto de inicio exacto (Opcional)">
-
-            <div class="route-toggle-container" style="margin-bottom: 20px;">
-                <input type="checkbox" id="dayToggle" class="toggle-checkbox">
-                <label for="dayToggle" class="toggle-label" style="background: rgba(255, 255, 255, 0.05);">
-                    <span class="toggle-text-left">1 Día 📅</span>
-                    <span class="toggle-btn" style="background: linear-gradient(45deg, #11998e, #38ef7d);"></span>
-                    <span class="toggle-text-right">Varios Días 🗓️</span>
-                </label>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AutoViaje
             </div>
+            <div class="nav-links">
+                <a href="#how">Cómo funciona</a>
+                <a href="#features">Características</a>
+                <a href="#testimonials">Historias</a>
+            </div>
+        </div>
+    </nav>
 
-            <div id="dayCountContainer" class="duration-container" style="display: none;">
-                <label class="duration-label">📅 ¿Cuántos días?</label>
-                <div class="duration-grid" style="grid-template-columns: repeat(3, 1fr);">
-                    <button type="button" class="day-btn active" data-days="2">2 Días</button>
-                    <button type="button" class="day-btn" data-days="3">3 Días</button>
-                    <button type="button" class="day-btn" data-days="4">4 Días</button>
+    <!-- HERO SECTION -->
+    <section class="hero" id="how">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Tu próximo viaje<br><span>diseñado por IA</span></h1>
+                <p>Olvídate de pasar horas planificando. Cuéntale a AutoViaje qué te gusta y obtén una ruta de Google
+                    Maps paso a paso optimizada al instante. Totalmente gratis.</p>
+                <div style="display: flex; gap: 20px; align-items: center; justify-content: center;">
+                    <a href="https://maps.google.com" target="_blank" style="color: inherit; text-decoration: none;">
+                        <i class="fa-brands fa-google"
+                            style="font-size: 1.5rem; opacity: 0.6; transition: opacity 0.3s;"></i>
+                    </a>
                 </div>
             </div>
-            <input type="hidden" id="daysCount" value="1">
 
-            <div class="route-toggle-container">
-                <input type="checkbox" id="routeTypeToggle" class="toggle-checkbox">
-                <label for="routeTypeToggle" class="toggle-label">
-                    <span class="toggle-text-left">Lineal 📏</span>
-                    <span class="toggle-btn"></span>
-                    <span class="toggle-text-right">Circular 🔄</span>
-                </label>
-            </div>
+            <!-- EMBEDDED APPLICATION CARD -->
+            <div class="app-card-wrapper">
+                <div class="glow-effect"></div>
+                <div class="card">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h1 class="form-title" style="margin: 0;">✈️ Planea tu Ruta</h1>
+                        <button type="button" id="clearBtn" title="Nueva Búsqueda"
+                            style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
 
-            <textarea id="interest" placeholder="¿Qué quieres ver? (Ej: Sitios curiosos y comida rica)" rows="3"
-                required></textarea>
+                    <form id="travelForm">
+                        <div class="route-toggle-container" style="margin-bottom: 20px;">
+                            <input type="checkbox" id="dayToggle" class="toggle-checkbox">
+                            <label for="dayToggle" class="toggle-label">
+                                <span class="toggle-text-left">1 Día 📅</span>
+                                <span class="toggle-btn"
+                                    style="background: linear-gradient(45deg, #11998e, #38ef7d);"></span>
+                                <span class="toggle-text-right">Varios Días 🗓️</span>
+                            </label>
+                        </div>
 
-            <div class="duration-container">
-                <label class="duration-label">⏱️ Duración diaria:</label>
-                <div class="duration-grid">
-                    <button type="button" class="duration-btn" data-time="60">1h</button>
-                    <button type="button" class="duration-btn active" data-time="90">1.5h</button>
-                    <button type="button" class="duration-btn" data-time="120">2h</button>
-                    <button type="button" class="duration-btn" data-time="180">3h</button>
+                        <div id="dayCountContainer" class="duration-container" style="display: none;">
+                            <label class="duration-label">📅 ¿Cuántos días?</label>
+                            <div class="duration-grid" style="grid-template-columns: repeat(3, 1fr);">
+                                <button type="button" class="day-btn active" data-days="2">2 Días</button>
+                                <button type="button" class="day-btn" data-days="3">3 Días</button>
+                                <button type="button" class="day-btn" data-days="4">4 Días</button>
+                                <button type="button" class="day-btn" data-days="5">5 Días</button>
+                                <button type="button" class="day-btn" data-days="6">6 Días</button>
+                                <button type="button" class="day-btn" data-days="7">7 Días</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="daysCount" value="1">
+
+                        <input type="text" id="location" placeholder="¿Dónde necesitas ir? (Ej: Madrid, Tokio...)"
+                            required>
+                        <input type="text" id="exactLocation"
+                            placeholder="Donde quieres que comience tu ruta (Hotel, Estación...)">
+
+                        <div id="globalRouteToggle" class="route-toggle-container">
+                            <input type="checkbox" id="routeTypeToggle" class="toggle-checkbox">
+                            <label for="routeTypeToggle" class="toggle-label">
+                                <span class="toggle-text-left">Lineal 📏</span>
+                                <span class="toggle-btn"></span>
+                                <span class="toggle-text-right">Circular 🔄</span>
+                            </label>
+                        </div>
+
+                        <div id="dailySettings" style="display: none; margin-bottom: 20px;">
+                            <!-- Generated by JS -->
+                        </div>
+
+                        <textarea id="interest"
+                            placeholder="¿Qué te gusta? (Ej: Arte moderno, comida callejera, parques...)" rows="3"
+                            required></textarea>
+
+                        <div class="duration-container">
+                            <label class="duration-label">⏱️ Tiempo disponible (por día):</label>
+                            <div class="duration-grid">
+                                <button type="button" class="duration-btn" data-time="60">1h</button>
+                                <button type="button" class="duration-btn active" data-time="90">1.5h</button>
+                                <button type="button" class="duration-btn" data-time="120">2h</button>
+                                <button type="button" class="duration-btn" data-time="180">3h</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="duration" value="90">
+
+                        <button type="submit" class="btn btn-search" id="submitBtn">Generar Ruta Mágica ✨</button>
+                    </form>
+
+                    <div class="spinner" id="spinner"></div>
+                    <div id="resultBox" class="result-box"></div>
+                    <div id="errorBox"
+                        style="display:none; color: #ff6b6b; margin-top: 20px; border: 1px solid rgba(255,0,0,0.3); padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px;">
+                    </div>
                 </div>
             </div>
-            <input type="hidden" id="duration" value="90">
-
-            <button type="submit" class="btn btn-search" id="submitBtn">Crear Ruta</button>
-        </form>
-
-        <div class="spinner" id="spinner"></div>
-        <div id="resultBox" class="result-box"></div>
-        <div id="errorBox"
-            style="display:none; color: #ff6b6b; margin-top: 20px; border: 1px solid red; padding: 10px; background: rgba(255,0,0,0.1);">
         </div>
-    </div>
+    </section>
 
-    <div class="footer">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <span>Powered by: <span class="footer-brand">Hermanos Vidal</span></span>
-        <span style="opacity: 0.6; font-size: 0.75rem; margin-left: 10px;">v4.2</span>
-    </div>
+    <!-- STATS SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>15k+</h3>
+                    <p>Viajes Planificados</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Usuarios Felices</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Ciudades Cubiertas</p>
+                </div>
+                <div class="stat-item">
+                    <h3>0€</h3>
+                    <p>Coste (Es gratis)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- FEATURES SECTION -->
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title">Por qué usar AutoViaje</h2>
+            <p class="section-subtitle">No es solo un mapa. Es inteligencia artificial aplicada a tu felicidad
+                vacacional.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>100% Personalizado</h3>
+                    <p>No hay dos viajes iguales. Nuestro algoritmo se adapta a tus gustos, ya sea arte, deporte o
+                        gastronomía.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>Horas Ahorradas</h3>
+                    <p>Lo que antes te llevaba días de investigación, ahora toma segundos. Disfruta el viaje, no la
+                        planificación.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-gem"></i></div>
+                    <h3>Joyas Ocultas</h3>
+                    <p>Descubre lugares que no salen en las guías turísticas tradicionales. Vive la ciudad como un
+                        local.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
+                    <h3>Rutas Lógicas</h3>
+                    <p>Optimizamos el caminar. Nada de ir de punta a punta sin sentido. Todo sigue un orden geográfico
+                        perfecto.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h3>Google Maps Ready</h3>
+                    <p>Exporta tu ruta directamente a Google Maps con un solo clic. Navegación GPS instantánea.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>IA Explicativa</h3>
+                    <p>No solo te decimos dónde ir, sino POR QUÉ. Historias y curiosidades de cada lugar generadas al
+                        momento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen los viajeros</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <div class="avatar" style="background: #FF512F; color: white;">A</div>
+                        <div>
+                            <strong>Ana García</strong>
+                            <div style="font-size: 0.8rem; color:#FFC107;">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Alucinante. Me organizó una ruta por Roma en 3 minutos que incluía sitios que ni mis amigos
+                        italianos conocían."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <div class="avatar" style="background: #DD2476; color: white;">C</div>
+                        <div>
+                            <strong>Carlos M.</strong>
+                            <div style="font-size: 0.8rem; color:#FFC107;">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Perfecto para viajes improvisados. Puse 'tengo 2 horas en París' y me salvó la tarde."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <div class="avatar" style="background: #6C63FF; color: white;">L</div>
+                        <div>
+                            <strong>Laura P.</strong>
+                            <div style="font-size: 0.8rem; color:#FFC107;">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Lo mejor es que te explica la historia de los sitios. Es como llevar un guía turístico en el
+                        bolsillo."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section features" id="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">¿Cuánto cuesta usar AutoViaje? <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">Es totalmente gratuito. Queremos democratizar el acceso a guías de viaje
+                        personalizados de alta calidad.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Funciona en cualquier ciudad? <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">Sí, nuestra IA tiene conocimiento global. Desde grandes capitales hasta
+                        pueblos pequeños con encanto en cualquier parte del mundo.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Puedo guardar las rutas? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Actualmente puedes abrir la ruta directamente en Google Maps y guardarla
+                        allí. Estamos trabajando en perfiles de usuario para la v5.3.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>AutoViaje AI</h4>
+                    <p style="color: var(--text-secondary); max-width: 300px;">La forma más inteligente de viajar. Rutas
+                        personalizadas al instante potenciadas por inteligencia artificial generativa.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Producto</h5>
+                    <ul>
+                        <li><a href="pages/product.html#features">Características</a></li>
+                        <li><a href="pages/product.html#business">Para Empresas</a></li>
+                        <li><a href="pages/product.html#roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Compañía</h5>
+                    <ul>
+                        <li><a href="pages/company.html#about">Sobre Nosotros</a></li>
+                        <li><a href="pages/company.html#blog">Blog</a></li>
+                        <li><a href="pages/company.html#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="pages/legal.html#privacy">Privacidad</a></li>
+                        <li><a href="pages/legal.html#terms">Términos</a></li>
+                        <li><a href="pages/legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 AutoViaje. Powered By Hermanos Vidal.
+                v5.0
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
     <script type="module">
         let routeData = [];
         let userOrigin = "";
@@ -334,6 +897,16 @@
         const daysCountInput = document.getElementById('daysCount');
         const dayBtns = document.querySelectorAll('.day-btn');
         const clearBtn = document.getElementById('clearBtn');
+        const globalRouteToggle = document.getElementById('globalRouteToggle');
+        const dailySettings = document.getElementById('dailySettings');
+
+        // --- FAQ TOGGLE LOGIC ---
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
 
         // --- CLEAR FORM LOGIC ---
         clearBtn.addEventListener('click', () => {
@@ -351,9 +924,14 @@
 
             // Reset Toggles
             if (dayToggle.checked) {
-                dayToggle.click(); // Trigger change event to hide container
+                dayToggle.click(); // Trigger change event logic
+            } else {
+                // Ensure correct initial state
+                dayCountContainer.style.display = 'none';
+                globalRouteToggle.style.display = 'flex';
+                dailySettings.style.display = 'none';
+                daysCountInput.value = '1';
             }
-            dayCountContainer.style.display = 'none';
 
             // Clear Results
             resultBox.style.display = 'none';
@@ -368,17 +946,48 @@
         });
 
         // --- UI LOGIC ---
+        function renderDailySettings(count) {
+            dailySettings.innerHTML = '';
+            if (count > 1) {
+                globalRouteToggle.style.display = 'none';
+                dailySettings.style.display = 'block';
+
+                for (let i = 1; i <= count; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'route-toggle-container';
+                    div.style.marginBottom = '10px';
+                    div.style.transform = 'scale(0.9)'; // Slightly smaller
+                    div.innerHTML = `
+                        <span style="color:white; font-weight:600; margin-right:10px; min-width:60px;">Día ${i}:</span>
+                        <input type="checkbox" id="routeToggleDay${i}" class="toggle-checkbox daily-toggle">
+                        <label for="routeToggleDay${i}" class="toggle-label" style="width:200px;">
+                            <span class="toggle-text-left">Lineal 📏</span>
+                            <span class="toggle-btn" style="width:50%;"></span>
+                            <span class="toggle-text-right">Circular 🔄</span>
+                        </label>
+                    `;
+                    dailySettings.appendChild(div);
+                }
+            } else {
+                globalRouteToggle.style.display = 'flex';
+                dailySettings.style.display = 'none';
+            }
+        }
+
         dayToggle.addEventListener('change', () => {
             if (dayToggle.checked) {
                 dayCountContainer.style.display = 'block';
+                // Trigger logic for multi-day
                 if (daysCountInput.value === '1') {
                     daysCountInput.value = '2';
                     dayBtns.forEach(b => b.classList.remove('active'));
                     document.querySelector('.day-btn[data-days="2"]').classList.add('active');
                 }
+                renderDailySettings(parseInt(daysCountInput.value));
             } else {
                 dayCountContainer.style.display = 'none';
                 daysCountInput.value = '1';
+                renderDailySettings(1);
             }
         });
 
@@ -386,7 +995,9 @@
             btn.addEventListener('click', () => {
                 dayBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                daysCountInput.value = btn.getAttribute('data-days');
+                const days = btn.getAttribute('data-days');
+                daysCountInput.value = days;
+                renderDailySettings(parseInt(days));
             });
         });
 
@@ -415,52 +1026,60 @@
             const interest = document.getElementById('interest').value;
             const exactLocation = document.getElementById('exactLocation').value;
             const duration = document.getElementById('duration').value;
-            const isCircular = document.getElementById('routeTypeToggle').checked;
-            const daysCount = document.getElementById('daysCount').value;
+            const daysCount = parseInt(document.getElementById('daysCount').value);
+
+            // Logic for route types per day
+            let routeTypesDesc = "";
+            let globalIsCircular = false; // For single day compatibility
+
+            if (daysCount > 1) {
+                for (let i = 1; i <= daysCount; i++) {
+                    const isCir = document.getElementById(`routeToggleDay${i}`).checked;
+                    routeTypesDesc += `- Día ${i}: ${isCir ? "CIRCULAR (Termina en inicio)" : "LINEAL (No vuelve)"}\n`;
+                }
+            } else {
+                globalIsCircular = document.getElementById('routeTypeToggle').checked;
+                routeTypesDesc = `- Día 1: ${globalIsCircular ? "CIRCULAR" : "LINEAL"}`;
+            }
 
             userOrigin = exactLocation ? exactLocation : location;
 
             // Construcción del Prompt
-            let exampleParadas;
-            if (isCircular) {
-                exampleParadas = `["${userOrigin}", "Lugar 1", "Lugar 2", "Lugar 3", "Lugar 4", "Lugar 5", "Lugar 6", "Lugar 7", "Lugar 8", "Lugar 9", "${userOrigin}"]`;
-            } else {
-                exampleParadas = `["${userOrigin}", "Lugar 1", "Lugar 2", "Lugar 3", "Lugar 4", "Lugar 5", "Lugar 6", "Lugar 7", "Lugar 8", "Lugar 9", "Fin"]`;
-            }
+            let exampleParadas = `["${userOrigin}", "Punto A", "Punto B", "..."]`;
 
             const prompt = `
-            ACTÚA COMO: Un guía local experto, historiador de ciudades y paisajes y planificador logístico de élite.
+            ACTÚA COMO: Un guía local experto.
             
             OBJETIVO: Crear la ruta turística PERFECTA de ${daysCount} día(s) en ${location}.
             
             DATOS DEL VIAJERO:
-            - Intereses Principales: "${interest}" (Prioridad ABSOLUTA. Si le gusta la comida, añade mercados/cafés famosos. Si le gusta la historia, detalla curiosidades).
-            - Duración Caminando Aproximadamente de la ruta: ${duration} minutos. (Calcula la distancia realista).
-            - Punto de Inicio Obligatorio: "${userOrigin}".
-            - Tipo de Ruta: ${isCircular ? "CIRCULAR (Debe terminar exactamente donde empezó)" : "LINEAL (Optimiza para no volver atrás)"}.
+            - Intereses: "${interest}"
+            - Duración Caminando: ${duration} minutos/día.
+            - Punto de Inicio: "${userOrigin}".
+            - CONFIGURACIÓN DE RUTA (Respetar estrictamente por día):
+            ${routeTypesDesc}
             
-            REGLAS DE ORO DE LA RUTA:
-            1. LÓGICA GEOGRÁFICA: Las paradas deben seguir un orden caminable REAL. No saltar de una punta de la ciudad a otra, ir consecutivamente de punto a punto por cercanía.
-            2. VALOR AÑADIDO: Cada parada debe tener un porqué, ser un lugar importante en la historia, cultura o gastronomía de la ciudad. No rellenes con sitios genéricos.
-            3. COMPLETITUD: Usa el tiempo disponible para cubrir todos los puntos de interés. Debes ajustar siempre el numero de sitios a la duración aproximada de la ruta, mejor pasarse poniendo muchos sitios.
-            4. HISTORIA EMOCIONANTE: En la descripción ("historia"), cuenta datos curiosos, oscuros o fascinantes. Usa emojis para dar vida.
-            
-            ESTRUCTURA DE RESPUESTA REQUERIDA (JSON PURO):
+            REGLAS:
+            1. Lógica Geográfica Real.
+            2. Valor Añadido (no sitios rellenos).
+            3. Completitud (ajustar sitios al tiempo).
+            4. MAPAS EXACTOS: En el array de "paradas", es OBLIGATORIO añadir ", ${location}" al final de cada nombre de sitio para evitar errores de búsqueda en Google Maps (Ej: "Museo del Prado, ${location}").
+
+            ESTRUCTURA DE RESPUESTA (JSON PURO):
             {
                 "dias": [
                     {
                         "dia": 1,
-                        "titulo": "Título Creativo del Día (Ej: 'Secretos del Barrio Gótico')",
-                        "historia": "Párrafo inmersivo explicando el recorrido y por qué es genial para este usuario.",
+                        "titulo": "Título...",
+                        "historia": "Historia...",
                         "paradas": ${exampleParadas}
                     }
                 ]
             }
-            IMPORTANTE: Devuelve SOLO el JSON sin markdown, sin "json", sin nada más.`;
+            IMPORTANTE: Devuelve SOLO el JSON.`;
 
             try {
                 // LLAMADA AL WORKER LOCAL (_worker.js)
-                // Usamos cache: 'no-store' para evitar que el navegador guarde la respuesta anterior
                 const response = await fetch("/api/route", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -514,7 +1133,7 @@
 
             } catch (error) {
                 console.error(error);
-                errorBox.innerText = `⚠️ Error: ${error.message}`;
+                errorBox.innerText = "⚠️ Se ha producido un error, vuelva a intentarlo o pruebe más tarde.";
                 errorBox.style.display = 'block';
             } finally {
                 spinner.style.display = 'none';
@@ -528,9 +1147,18 @@
             if (!dayRoute || !dayRoute.paradas) return alert("Error al cargar la ruta.");
 
             let paradas = [...dayRoute.paradas];
-            const isCircular = document.getElementById('routeTypeToggle').checked;
+            const daysCount = parseInt(document.getElementById('daysCount').value);
 
-            // FIX: Remove start point if duplicated in waypoints
+            let isCircular = false;
+            if (daysCount > 1) {
+                // Determine setting for this specific day
+                // dayIndex is 0-based, day settings are 1-based IDs
+                const toggle = document.getElementById(`routeToggleDay${dayIndex + 1}`);
+                if (toggle) isCircular = toggle.checked;
+            } else {
+                isCircular = document.getElementById('routeTypeToggle').checked;
+            }
+
             if (paradas.length > 0 && userOrigin) {
                 const firstStop = paradas[0].toLowerCase().trim();
                 const originClean = userOrigin.toLowerCase().trim();

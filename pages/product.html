@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - AutoViaje</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --accent-gradient: linear-gradient(45deg, #FF512F, #DD2476);
+            --bg-dark: #141E30;
+            --bg-darker: #0f1724;
+            --text-main: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .navbar {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1,
+        h2 {
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        /* --- FEATURES DETAIL --- */
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 100px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .feature-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-visual {
+            flex: 1;
+            height: 250px;
+            background: var(--bg-darker);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #FF512F;
+        }
+
+        /* --- ROADMAP --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: #141E30;
+            border: 2px solid #FF512F;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+            text-align: right;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        /* --- B2B --- */
+        .b2b-box {
+            text-align: center;
+            padding: 60px;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .b2b-box h2 {
+            -webkit-text-fill-color: white;
+            color: white;
+        }
+
+        .btn-white {
+            background: white;
+            color: #FF512F;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="../index.html" class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AutoViaje
+            </a>
+        </nav>
+
+        <h1>Nuestra Tecnología</h1>
+
+        <section id="features" style="margin-top: 60px;">
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h2>Algoritmo Genético de Rutas</h2>
+                    <p>No usamos plantillas. Nuestro algoritmo calcula la distancia óptima entre puntos de interés
+                        basándose en clueters geográficos, asegurando que camines lo justo y necesario.</p>
+                </div>
+                <div class="feature-visual"><i class="fa-solid fa-route"></i></div>
+            </div>
+
+            <div class="feature-row reverse">
+                <div class="feature-text">
+                    <h2>Personalización Contextual</h2>
+                    <p>Entendemos "quiero algo romántico pero barato". Nuestra IA analiza el sentimiento de tu petición
+                        y cruza datos con miles de reseñas para encontrar el match perfecto.</p>
+                </div>
+                <div class="feature-visual"><i class="fa-solid fa-heart"></i></div>
+            </div>
+        </section>
+
+        <section id="business">
+            <div class="b2b-box">
+                <h2>AutoViaje para Empresas</h2>
+                <p>¿Tienes una agencia de viajes o un hotel? Integra nuestra API y ofrece a tus clientes itinerarios
+                    automáticos con tu propia marca.</p>
+                <a href="company.html#contact" class="btn-white">Solicitar Demo API</a>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <h2 style="text-align: center;">Roadmap de Desarrollo</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>v4.5 (Actual)</h3>
+                        <p>Mejoras en UI/UX, Modo Oscuro nativo, Rutas circulares optimizadas.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Q3 2026</h3>
+                        <p>Cuentas de usuario, Guardado de historial en la nube, App nativa iOS/Android.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Q4 2026</h3>
+                        <p>Reservas integradas (Vuelos y Hoteles), Modo Offline para viajeros sin roaming.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
