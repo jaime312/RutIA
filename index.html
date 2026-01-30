@@ -11,6 +11,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #6C63FF;
             --accent-gradient: linear-gradient(45deg, #FF512F, #DD2476);
@@ -25,6 +29,9 @@
 
         body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #141E30, #243B55);
             background-attachment: fixed;
@@ -566,10 +573,44 @@
         }
 
         /* RESPONSIVE */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
+            .navbar {
+                position: relative;
+                /* Prevent overlap issues on mobile */
+                background: var(--bg-dark);
+                /* Solid background for readability */
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero {
+                padding-top: 20px;
+                align-items: center;
+                /* Center vertically on mobile if content fits, or top if long */
+            }
+
             .hero-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
+                width: 100%;
+                /* Ensure full width */
+                margin: 0 auto;
+                padding: 0 10px;
+                /* Safety padding */
+            }
+
+            .card {
+                padding: 20px;
+                /* Reduced padding */
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+                /* Smaller title */
             }
 
             .hero-text p {
@@ -582,6 +623,21 @@
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
+                text-align: center;
+                /* Force center alignment */
+            }
+
+            .footer-brand,
+            .footer-col,
+            .footer-bottom {
+                text-align: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-brand p {
+                margin: 0 auto 20px auto;
             }
         }
     </style>
@@ -870,7 +926,7 @@
             </div>
             <div class="footer-bottom">
                 &copy; 2026 RutIA. Powered By Hermanos Vidal.
-                v5.5
+                v5.6
                 <div style="font-size: 0.6rem; opacity: 0.3; margin-top: 10px;">
                     * Las rutas han sido creadas por IA y pueden contener errores. Evalúe siempre su ruta con otras
                     fuentes de información.
@@ -961,9 +1017,9 @@
                     div.style.gap = '10px';
 
                     div.innerHTML = `
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <span style="color:white; font-weight:600;">Día ${i}:</span>
-                            <div style="display: flex; align-items: center; width: 200px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+                            <span style="color:white; font-weight:600; white-space: nowrap;">Día ${i}:</span>
+                            <div style="display: flex; align-items: center; flex: 1; max-width: 220px;">
                                 <input type="checkbox" id="routeToggleDay${i}" class="toggle-checkbox daily-toggle">
                                 <label for="routeToggleDay${i}" class="toggle-label" style="width:100%; margin:0;">
                                     <span class="toggle-text-left">Lineal 📏</span>
@@ -1084,7 +1140,7 @@
                     {
                         "dia": 1,
                         "titulo": "Título...",
-                        "historia": "Historia...",
+                        "historia": "Haz una historia detallada de la ruta con emojis y atractiva...",
                         "paradas": ${exampleParadas}
                     }
                 ]
